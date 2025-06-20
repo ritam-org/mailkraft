@@ -1,0 +1,18 @@
+---JSON---
+{
+  "title": "Welcome Email",
+  "description": "Sent to new users",
+  "variables": {
+    "name": "Name of the recipient",
+    "product": "Product name",
+    "link": "CTA link"
+  },
+  "license": "MIT"
+}
+---HTML---
+<h1>Welcome, {{name}}!</h1>
+<p>Thanks for trying {{product}}. Click <a href="{{link}}">here</a> to get started.</p>
+---TEXT---
+Welcome, {{name}}!
+Thanks for trying {{product}}.
+Visit: {{link}}

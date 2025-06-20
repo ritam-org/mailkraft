@@ -1,0 +1,38 @@
+{
+  "name": "mailkraft",
+  "version": "1.0.0",
+  "description": "A library to generate styled email content",
+  "keywords": [
+    "mail",
+    "email",
+    "template"
+  ],
+  "homepage": "https://github.com/ritam-org/mailkraft#readme",
+  "bugs": {
+    "url": "https://github.com/ritam-org/mailkraft/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ritam-org/mailkraft.git"
+  },
+  "license": "MIT",
+  "author": "Vishok M",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "dev": "tsup src/index.ts --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  }
+}
