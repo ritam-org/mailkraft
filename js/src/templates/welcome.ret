@@ -7,11 +7,15 @@
     "product": "Product name",
     "link": "CTA link"
   },
+  "theme": {
+    "extraHtml": "The extra HTML to apply to the template"
+  },
   "license": "MIT"
 }
 ---HTML---
 <h1>Welcome, {{name}}!</h1>
 <p>Thanks for trying {{product}}. Click <a href="{{link}}">here</a> to get started.</p>
+{{extraHtml}}
 ---TEXT---
 Welcome, {{name}}!
 Thanks for trying {{product}}.
