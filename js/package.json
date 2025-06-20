@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.3",
+    "@types/sanitize-html": "^2.16.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
@@ -34,5 +35,8 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
+  },
+  "dependencies": {
+    "sanitize-html": "^2.17.0"
   }
 }

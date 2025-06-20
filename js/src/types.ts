@@ -16,7 +16,8 @@ export type ThemeData = {
 export type RETMeta = {
     name: string;
     description?: string;
-    tags?: string[];
+    keywords?: string[];
+    allowed?: string[];
     locale?: string;
     variables: Record<string, TemplateVariable>;
     theme?: ThemeData;

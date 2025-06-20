@@ -2,8 +2,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { ParsedRET, RETMeta } from "./types";
 import { readdirSync, readFileSync } from "fs";
-import { parseRET } from "./parser";
-import { replaceVars } from "./utils";
+import { parseRET, replaceVars } from "./parser";
+import { sanitize } from "./utils";
 
 let TEMPLATE_DIR: string;
 const isESM = typeof __filename === 'undefined';
@@ -27,7 +27,8 @@ if (isESM) {
  */
 export function generate(
     template: string,
-    data: Record<string, any>
+    data: Record<string, any>,
+    theme?: Record<string, any>
 ): { html: string; text: string; meta: RETMeta } {
 
     let parsed: ParsedRET | undefined;
@@ -57,7 +58,10 @@ export function generate(
         throw new Error(`Template "${template}" could not be parsed.`);
     }
 
-    const html = replaceVars(parsed.html, data);
+    data = sanitize(data, parsed.meta.allowed || []);
+
+    let html = replaceVars(parsed.html, theme || {}, true);
+    html = replaceVars(html, data);
     const text = replaceVars(parsed.text, data);
     const meta = parsed.meta;
 
