@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mailkraft | Your library to generate styled email content</title>
+    <meta property="og:title" content="mailkraft | Your library to generate styled email content">
+    <meta property="og:description" content="mailkraft helps you generate styled email content easily across platforms.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mailkraft.vishok.me/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mailkraft | Your library to generate styled email content">
+    <meta name="twitter:description" content="mailkraft helps you generate styled email content easily across platforms.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+        }
+
+        .code-block {
+            font-family: 'Fira Code', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .viewer-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-semibold text-primary-600">mailkraft</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#docs" class="text-gray-600 hover:text-primary-600 transition">Documentation</a>
+                    <a href="#ret" class="text-gray-600 hover:text-primary-600 transition">RET Format</a>
+                    <a href="https://github.com/yourusername/mailkraft" target="_blank"
+                        class="text-gray-600 hover:text-primary-600 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white flex items-center justify-center min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                    <span class="text-primary-100">mailkraft</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-primary-100 mb-12">
+                    Your library to generate styled email content
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 max-w-2xl mx-auto">
+                    <a href="https://npmjs.com/mailkraft"
+                        class="bg-[#CC3534] text-white px-6 py-3 font-medium hover:bg-[#a62a29] transition flex items-center gap-2"
+                        target="_blank">
+                        <i class="fab fa-npm text-2xl"></i> npm install mailkraft
+                    </a>
+                    <a href="#"
+                        class="bg-yellow-500 text-white px-6 py-3 font-medium hover:bg-yellow-600 transition flex items-center gap-2">
+                        <i class="fab fa-python text-2xl"></i> pip install mailkraft
+                    </a>
+                    <a href="#"
+                        class="bg-purple-600 text-white px-6 py-3 font-medium hover:bg-purple-700 transition flex items-center gap-2">
+                        <i class="fab fa-php text-2xl"></i> composer require mailkraft
+                    </a>
+                    <a href="https://marketplace.visualstudio.com/items?itemName=Ritam.ret-extension" target="_blank"
+                        class="bg-blue-600 text-white px-6 py-3 font-medium hover:bg-blue-700 transition flex items-center gap-2">
+                        <i class="fas fa-code text-xl"></i> VSCode Extension
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Viewer Section (Hidden on mobile) -->
+    <section class="viewer-section bg-gray-100 border-t border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-white shadow-sm rounded-md overflow-hidden">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="ml-4 text-sm text-gray-500" id="viewer-title">
+                        mailkraft preview
+                    </div>
+                    <div class="ml-auto">
+                        <label
+                            class="cursor-pointer bg-white border border-gray-300 rounded-md px-3 py-1 text-sm hover:bg-gray-50 transition">
+                            <input type="file" id="ret-upload" accept=".ret" class="hidden" id="ret-upload">
+                            Upload RET
+                        </label>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div id="viewer-content"></div>
+                    <!-- Initial placeholder -->
+                    <div id="preview-placeholder" class="text-center py-12 text-gray-400" id="viewer-placeholder">
+                        <i class="fas fa-envelope-open-text text-5xl mb-4"></i>
+                        <p>Upload a RET template to preview</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="docs" class="bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Documentation</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Installation -->
+                <div class="bg-gray-50 p-6 rounded-md">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-600">Installation</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium mb-2">Node.js</h4>
+                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
+                                <code>npm install mailkraft</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-2">Python</h4>
+                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
+                                <code>pip install mailkraft</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-2">PHP</h4>
+                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
+                                <code>composer require mailkraft</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basic Usage -->
+                <div class="bg-gray-50 p-6 rounded-md">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-600">Basic Usage (JS)</h3>
+                    <div class="space-y-4">
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
+                            <pre><code>import { generate } from 'mailkraft';
+
+const result = generate('defaultOtp', {
+    appName: "My App",
+    name: "John Doe",
+    verificationCode: "123456",
+    validity: "10 minutes"
+});
+
+console.log(result.html); // HTML content
+console.log(result.text); // Plain text content
+console.log(result.meta); // Template metadata</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Reference -->
+                <div class="bg-gray-50 p-6 rounded-md md:col-span-2">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-600">API Reference</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-medium mb-2 text-gray-800">generate(template, data, theme?)</h4>
+                            <p class="text-gray-600 mb-3">Generates email content using the specified template and data.
+                            </p>
+                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
+                                <pre><code>const result = generate('templateName', {
+    // Template variables
+}, {
+    // Theme variables (optional)
+});</code></pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-medium mb-2 text-gray-800">meta(template)</h4>
+                            <p class="text-gray-600 mb-3">Retrieves metadata for the specified template.</p>
+                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
+                                <pre><code>const templateMeta = meta('templateName');</code></pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-medium mb-2 text-gray-800">list()</h4>
+                            <p class="text-gray-600 mb-3">Returns an array of available template names.</p>
+                            <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
+                                <pre><code>const templates = list();
+console.log(templates); // ['defaultOtp', 'welcome', ...]</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RET Format Section -->
+    <section id="ret" class="bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">RET Format</h2>
+
+            <div class="bg-white p-6 rounded-md shadow-sm mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-primary-600">What is RET?</h3>
+                <p class="text-gray-600 mb-4">
+                    RET (Ritam Email Template) is a simple format for creating email templates with mailkraft.
+                    It separates metadata, HTML content, and plain text content into distinct sections.
+                </p>
+
+                <div class="code-block bg-gray-800 text-gray-100 p-6 rounded-md overflow-x-auto">
+                    <pre><code>---JSON---
+{
+    "name": "Template Name",
+    "description": "Template description",
+    "variables": {
+        "var1": "Description of variable 1",
+        "var2": "Description of variable 2"
+    },
+    "theme": {
+        "color1": "Description of theme variable 1"
+    }
+}
+---HTML---
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;{{title}}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello {{name}}!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+---TEXT---
+Hello {{name}}!
+Welcome to our service.</code></pre>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- JSON Section -->
+                <div class="bg-white p-6 rounded-md shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-600">JSON Section</h3>
+                    <p class="text-gray-600 mb-4">
+                        The JSON section contains template metadata, variable definitions, and theme variables.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                        <li><code>name</code>: Template name</li>
+                        <li><code>description</code>: Template description</li>
+                        <li><code>variables</code>: Object describing template variables</li>
+                        <li><code>theme</code>: Object describing theme variables</li>
+                        <li><code>allowed</code>: Optional array of allowed HTML tags</li>
+                    </ul>
+                </div>
+
+                <!-- HTML Section -->
+                <div class="bg-white p-6 rounded-md shadow-sm">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-600">HTML Section</h3>
+                    <p class="text-gray-600 mb-4">
+                        The HTML section contains the email's HTML content with template variables.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                        <li>Use <code>{{variable}}</code> for variable substitution</li>
+                        <li>Supports conditional blocks with <code>{{#if variable}}...{{/if}}</code></li>
+                        <li>Theme variables can be used for styling</li>
+                        <li>Email-safe HTML is recommended</li>
+                    </ul>
+                </div>
+
+                <!-- Text Section -->
+                <div class="bg-white p-6 rounded-md shadow-sm md:col-span-2">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-600">Text Section</h3>
+                    <p class="text-gray-600 mb-4">
+                        The text section contains the plain text version of the email.
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                        <li>Simple text with variable substitution</li>
+                        <li>No HTML or styling</li>
+                        <li>Important for email clients that don't support HTML</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">mailkraft</h3>
+                    <p class="mb-4">Your library to generate styled email content across platforms.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/ritam-org/mailkraft" target="_blank"
+                            class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="https://npmjs.com/mailkraft" target="_blank"
+                            class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-npm text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#docs" class="hover:text-white transition">Documentation</a></li>
+                        <li><a href="#ret" class="hover:text-white transition">RET Format</a></li>
+                        <li><a href="https://github.com/ritam-org/mailkraft"
+                                class="hover:text-white transition">GitHub</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">License</h3>
+                    <p>MIT Licensed. Free to use for personal and commercial projects.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
+                <p>&copy; 2025 mailkraft. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="mailkraft-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-900 bg-opacity-75"></div>
+            </div>
+
+            <!-- Modal panel -->
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <!-- Header with progress indicator -->
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 id="modal-title" class="text-lg font-medium text-white">Template Variables</h3>
+                            <div class="flex space-x-2 mt-1">
+                                <div id="step1-indicator" class="h-1 w-6 bg-white rounded-full"></div>
+                                <div id="step2-indicator" class="h-1 w-6 bg-blue-400 rounded-full"></div>
+                            </div>
+                        </div>
+                        <button id="modal-close" class="text-white hover:text-blue-200">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content area -->
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div id="dynamic-fields" class="space-y-4"></div>
+                </div>
+
+                <!-- Footer buttons -->
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button id="modal-next" type="button"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                        Next
+                    </button>
+                    <button id="modal-back" type="button"
+                        class="hidden mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Back
+                    </button>
+                    <button id="modal-cancel" type="button"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class MailkraftModal {
+            constructor() {
+                this.modal = document.getElementById('mailkraft-modal');
+                this.fieldsContainer = document.getElementById('dynamic-fields');
+                this.titleElement = document.getElementById('modal-title');
+                this.nextButton = document.getElementById('modal-next');
+                this.backButton = document.getElementById('modal-back');
+                this.cancelButton = document.getElementById('modal-cancel');
+                this.closeButton = document.getElementById('modal-close');
+                this.step1Indicator = document.getElementById('step1-indicator');
+                this.step2Indicator = document.getElementById('step2-indicator');
+
+                this.currentStep = 1;
+                this.templateValues = {};
+                this.resolvePromise = null;
+
+                // Event listeners
+                this.nextButton.addEventListener('click', () => this.handleNext());
+                this.backButton.addEventListener('click', () => this.handleBack());
+                this.cancelButton.addEventListener('click', () => this.close());
+                this.closeButton.addEventListener('click', () => this.close());
+            }
+
+            async open(templateVars, themeVars) {
+                this.templateVars = templateVars || {};
+                this.themeVars = themeVars || {};
+                this.currentStep = 1;
+
+                this.showStep1();
+                this.modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+
+                return new Promise((resolve) => {
+                    this.resolvePromise = resolve;
+                });
+            }
+
+            showStep1() {
+                this.currentStep = 1;
+                this.titleElement.textContent = "Template Variables";
+                this.nextButton.textContent = Object.keys(this.themeVars).length > 0 ? "Next" : "Generate";
+                this.backButton.classList.add('hidden');
+                this.updateProgressIndicators();
+                this.renderFields(this.templateVars);
+            }
+
+            showStep2() {
+                this.currentStep = 2;
+                this.titleElement.textContent = "Theme Options";
+                this.nextButton.textContent = "Generate";
+                this.backButton.classList.remove('hidden');
+                this.updateProgressIndicators();
+                this.renderFields(this.themeVars);
+            }
+
+            updateProgressIndicators() {
+                this.step1Indicator.classList.toggle('bg-white', this.currentStep === 1);
+                this.step1Indicator.classList.toggle('bg-blue-400', this.currentStep !== 1);
+                this.step2Indicator.classList.toggle('bg-white', this.currentStep === 2);
+                this.step2Indicator.classList.toggle('bg-blue-400', this.currentStep !== 2);
+            }
+
+            renderFields(fields) {
+                this.fieldsContainer.innerHTML = '';
+
+                Object.entries(fields).forEach(([name, description]) => {
+                    const fieldDiv = document.createElement('div');
+                    fieldDiv.className = 'space-y-1';
+
+                    // Special handling for color fields
+                    if (name.toLowerCase().includes('color') || name.toLowerCase().includes('background')) {
+                        fieldDiv.innerHTML = `
+          <label class="block text-sm font-medium text-gray-700">${name}</label>
+          <p class="text-xs text-gray-500 mb-1">${description}</p>
+          <div class="flex items-center gap-2">
+            <input type="text" 
+                   data-field="${name}" 
+                   class="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <input type="color" class="w-10 h-10 p-1 border border-gray-300 rounded-md cursor-pointer">
+          </div>
+        `;
+
+                        const colorInput = fieldDiv.querySelector('input[type="color"]');
+                        const textInput = fieldDiv.querySelector('input[type="text"]');
+
+                        colorInput.addEventListener('input', (e) => {
+                            textInput.value = e.target.value;
+                        });
+
+                        textInput.addEventListener('input', (e) => {
+                            if (e.target.value.match(/^#[0-9A-F]{6}$/i)) {
+                                colorInput.value = e.target.value;
+                            }
+                        });
+                    } else {
+                        fieldDiv.innerHTML = `
+          <label class="block text-sm font-medium text-gray-700">${name}</label>
+          <p class="text-xs text-gray-500 mb-1">${description}</p>
+          <input type="text" 
+                 data-field="${name}" 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        `;
+                    }
+
+                    this.fieldsContainer.appendChild(fieldDiv);
+                });
+            }
+
+            handleNext() {
+                const inputs = this.fieldsContainer.querySelectorAll('[data-field]');
+                const values = {};
+
+                inputs.forEach(input => {
+                    values[input.dataset.field] = input.value;
+                });
+
+                if (this.currentStep === 1) {
+                    this.templateValues = values;
+                    if (Object.keys(this.themeVars).length > 0) {
+                        this.showStep2();
+                    } else {
+                        this.submit();
+                    }
+                } else {
+                    this.submit(values); // Pass theme values
+                }
+            }
+
+            handleBack() {
+                this.showStep1();
+            }
+
+            submit(themeValues = {}) {
+                const allValues = {
+                    template: this.templateValues,
+                    theme: themeValues
+                };
+                this.resolvePromise(allValues);
+                this.close();
+            }
+
+            close() {
+                this.modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+                this.resolvePromise(null);
+            }
+        }
+
+        // Initialize modal
+        const modal = new MailkraftModal();
+    </script>
+
+    <script>
+        class EmailViewer {
+            constructor(containerId) {
+                this.container = document.getElementById(containerId);
+                this.iframe = document.createElement('iframe');
+                this.iframe.setAttribute('sandbox', 'allow-same-origin');
+                this.iframe.style.display = 'none';
+                this.iframe.style.width = '100%';
+                this.iframe.style.border = 'none';
+                this.iframe.style.background = 'white';
+                this.container.innerHTML = '';
+                this.container.appendChild(this.iframe);
+            }
+
+            render(completeEmailHTML) {
+                this.iframe.style.display = 'block';
+                const doc = this.iframe.contentDocument || this.iframe.contentWindow.document;
+                doc.open();
+                doc.write(completeEmailHTML); // Directly use the full HTML output
+                doc.close();
+
+                // Auto-resize after content loads
+                this.iframe.onload = () => {
+                    this.iframe.style.height = doc.body.scrollHeight + 'px';
+                };
+            }
+        }
+
+        const viewer = new EmailViewer('viewer-content');
+    </script>
+
+    <script type="module">
+        import { generate, meta } from "https://cdn.jsdelivr.net/npm/mailkraft@1.1.0/dist/mailkraft-web.min.js";
+        //when a file is uploaded, alert with the content of the file
+        let variable = {};
+        let theme = {};
+        document.getElementById('ret-upload').addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            const fileContent = await new Promise((resolve, reject) => {
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+
+            const retmeta = meta(fileContent);
+
+            const result = await modal.open(retmeta.variables, retmeta.theme);
+
+            const html = generate(fileContent, result.template, result.theme);
+            document.getElementById('viewer-title').textContent = retmeta.name;
+            document.getElementById('preview-placeholder').style.display = 'none';
+            viewer.render(html.html);
+
+        });
+
+    </script>
+</body>
+
+</html>
