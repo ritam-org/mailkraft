@@ -1,6 +1,6 @@
 {
   "name": "mailkraft",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A library to generate styled email content",
   "keywords": [
     "mail",
@@ -21,11 +21,14 @@
   "main": "index.js",
   "scripts": {
     "build": "tsup src/index.ts --dts --format cjs,esm",
-    "dev": "tsup src/index.ts --watch"
+    "dev": "tsup src/index.ts --watch",
+    "build-web": "esbuild src/browser/index.ts --bundle --format=esm --outfile=dist/mailkraft-web.js --minify --target=es2015",
+    "build-web-min": "esbuild src/browser/index.ts --bundle --minify --format=esm --outfile=dist/mailkraft-web.min.js --target=es2015"
   },
   "devDependencies": {
     "@types/node": "^24.0.3",
     "@types/sanitize-html": "^2.16.0",
+    "esbuild": "^0.25.5",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
