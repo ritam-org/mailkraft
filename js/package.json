@@ -1,5 +1,5 @@
 {
-  "name": "mailkraft",
+  "name": "@ritam-org/mailkraft",
   "version": "1.0.0",
   "description": "A library to generate styled email content",
   "keywords": [
