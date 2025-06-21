@@ -8,7 +8,6 @@
     "validity": "The validity period of the verification code, e.g., '10 minutes'"
   },
   "theme": {
-    "heroTitle": "The hero title of the email",
     "logo": "URL to the logo image",
     "appName": "Your App Name",
     "mailTitle": "The title of the email",
@@ -141,10 +140,6 @@
 </head>
 <body style="margin: 0; padding: 0;" class="bg-body">
     <center style="width: 100%;" class="bg-body">
-        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all;">
-            {{heroTitle}}
-        </div>
-
         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" class="container bg-body">
             <!-- Header with Logo -->
             <tr>
@@ -211,7 +206,6 @@
 </html>
 ---TEXT---
 {{mailTitle}}
-{{heroTitle}}
 Hello {{name}},
 Thank you for signing up for {{appName}}! Please use the following code to verify your account:
 {{verificationCode}}
