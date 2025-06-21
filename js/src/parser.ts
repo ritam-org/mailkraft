@@ -12,7 +12,7 @@ export function parseRET(content: string): ParsedRET {
 }
 
 export function replaceVars(template: string, vars: Record<string, any>, preserveMissing?: boolean): string {
-    // Process loops first
+    // Process loops first: {{#for item in collection}}...{{/for}}
     template = template.replace(/{{#for\s+(\w+)\s+in\s+([\w.]+)}}([\s\S]*?){{\/for}}/g, (_, itemName, collectionPath, loopContent) => {
         const collection = resolveNestedValue(vars, collectionPath);
         
@@ -29,7 +29,7 @@ export function replaceVars(template: string, vars: Record<string, any>, preserv
         }).join('');
     });
 
-    // Process conditionals
+    // Process conditionals: {{#if condition}}...{{/if}}
     template = template.replace(/{{#if\s+([\w.]+)}}([\s\S]*?){{\/if}}/g, (_, key, content) => {
         const value = resolveNestedValue(vars, key);
         return value ? replaceVars(content, vars, preserveMissing) : '';
